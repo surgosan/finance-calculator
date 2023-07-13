@@ -48,6 +48,14 @@
 5. 'You spent <$amount> more/less than some day'
 6. EZ money change updater
 
+### Home Cards
+
+1. Net Worth
+2. Expenses so far (month)
+3. Expenses today
+4. So far, you have spend # more/less than last week
+5. Ez input
+
 ## Calculator Page
 
 ## Investments Page

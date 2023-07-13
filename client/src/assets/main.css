@@ -8,3 +8,14 @@
     padding-left: .5rem;
     padding-right: .5rem;
 }
+
+#app {
+    min-height: 95dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    gap: 2rem;
+}

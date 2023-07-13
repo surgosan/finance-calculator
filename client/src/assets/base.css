@@ -52,6 +52,12 @@ nav a {
 	color: var(--text);
 }
 
+button {
+	background: var(--background);
+	border: solid 1px var(--header);
+	border-radius: 5px;
+}
+
 h1, h2, button, h3, label {
 	color: var(--header);
 }
@@ -62,6 +68,12 @@ p, a, ul, li {
 
 nav a.router-link-exact-active {
 	color: var(--theme);
+}
+
+input {
+	margin: 1rem .5rem;
+	border-radius: .5rem;
+	padding: .5rem;
 }
 
 ::-webkit-scrollbar {
