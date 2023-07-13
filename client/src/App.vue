@@ -17,7 +17,10 @@
     </div>
 
   </nav>
-  <router-view id="view"/>
+
+  <main>
+    <router-view/>
+  </main>
 </template>
 
 <style scoped>
@@ -45,8 +48,13 @@
     margin-top: 1rem;
   }
 
-  #view {
-    flex-grow: 1;
+  main {
+    width: 50dvw;
+    margin-top: 3rem;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 </style>
 

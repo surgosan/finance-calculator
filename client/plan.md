@@ -56,6 +56,17 @@
 4. So far, you have spend # more/less than last week
 5. Ez input
 
+- Home Layout
+- Welcome, name
+- You have $# in your savings. or Your % complete with this goal
+- Net Worth green or black #
+- Tug of war line for assets and liabilities
+- Accounts current price status (You add) 
+  - Can be debit, credit, loan, retirement, investment
+- Monthly Spending snapshot (pie)
+- Latest 5 transactions
+- Biggest Transaction this month
+
 ## Calculator Page
 
 ## Investments Page

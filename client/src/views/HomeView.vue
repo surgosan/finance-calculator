@@ -1,48 +1,60 @@
 <template>
 
-  <div class="cards">
-    <div class="row">
+  <h2>Welcome Name</h2>
 
-      <div class="easyInput cards_item">
-        <label for="ezInput">Input changes here</label>
-        <input id="ezInput" type="number">
-        <button type="submit">Enter</button>
-      </div>
+  <h1>{{ quote_tile }}</h1>
 
-      <div class="net_worth_card cards_item">
-        <h3>Your current net worth is</h3>
-        <h2 class="card_price">#0</h2>
-      </div>
-    </div>
+<!--  v-if savings exists-->
+  <h2>You have $ in your saving account.</h2>
 
-    <div class="row">
-      <h1 id="quote"> {{ quote_tile }} </h1>
-    </div>
+  <div class="net_worth section">
+      <header class="row">
+        <p>Net Worth</p>
+        <div class="flex-spacer"></div>
+        <p>$750.00</p>
+      </header>
+  </div>
 
-    <div class="row">
-      <div class="todays_spending cards_item">
-        <h3>So far today, you have spent</h3>
-        <h1 class="card_price">$0</h1>
-      </div>
+  <div class="assets_to_liability section">
+      <main>
+        <div class="row">
+          <p>$750.00</p>
+          <div class="flex-spacer"></div>
+          <p>$250.00</p>
+        </div>
 
-      <div class="week_comparison cards_item">
-        <h3>Compared to yesterday, you have spent</h3>
-        <h2 class="card_price">$0</h2>
-        <h3>more than last week.</h3>
-      </div>
+          <span class="bar_container bar">
+            <span id="assets_bar" class="bar"></span>
+          </span>
 
-      <div class="montly_spending cards_item">
-        <h3>This month you have spent</h3>
-        <h2 class="card_price">$0</h2>
-      </div>
-    </div>
+          <div class="row">
+            <p>Assets</p>
+            <div class="flex-spacer"></div>
+            <p>Liabilities</p>
+          </div>
+      </main>
+  </div>
+
+  <div class="accounts section">
+    <h2>Accounts</h2>
+
+    <account_balance/>
+
+    <h3 class="section_button">Add an account</h3>
   </div>
 </template>
 
 <script setup>
 import {onMounted, ref} from "vue";
+import Account_balance from "@/components/account_balance.vue";
 
-const quotes = ["Take control over your finances.", "Earn your financial freedom.", "If not you ... then who?", "Another day, another dollar."];
+const quotes = ["Take control over your finances.",
+    "Earn your financial freedom.",
+    "If not you ... then who?", "Another day, another dollar.",
+    "Prove them wrong.",
+    "Being kind can go a long way.",
+    "An investment in knowledge pays the best interest.",
+    "Pay it forward."];
 
   const quote_tile = ref("");
 
@@ -55,44 +67,35 @@ const quotes = ["Take control over your finances.", "Earn your financial freedom
 </script>
 
 <style scoped>
+  .section {
+    width: 75%;
+    padding: 0 2rem;
+    margin-top: 1rem;
+    background: var(--background-2);
+    border-radius: .5rem;
+  }
 
-.row {
-  flex-grow: 1;
-  line-height: .8;
-  gap: 1rem;
-}
+  .section_button {
+    cursor: pointer;
+    width: fit-content;
+    background: var(--background-3);
+    padding: .25rem 1rem;
+    border-radius: .75rem;
+    text-align: right;
+    margin-left: 50%;
+    transform: translate(-50%);
+  }
 
-.cards {
-  display: flex;
-  flex-direction: column;
-  margin: 3rem;
-  align-items: center;
-}
+  .bar {
+    display: block;
+    width: 100%;
+    height: .5rem;
+    border-radius: .5rem;
+    background: var(--background-3);
+  }
 
-.cards_item {
-  margin: 3rem;
-  background: var(--background-2);
-  padding: 1rem 1.5rem;
-  border: solid 2px var(--header);
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.card_price {
-  color: var(--accent);
-  font-size: 2.5rem;
-}
-
-#quote {
-  letter-spacing: 1px;
-}
-
-label[for='ezInput'] {
-  font-size: 1rem;
-  font-weight: bold;
-}
-
+  #assets_bar {
+    width: 75%;
+    background: var(--accent);
+  }
 </style>
