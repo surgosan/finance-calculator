@@ -16,7 +16,7 @@ import {computed, ref} from "vue";
     <div class="row">
       <p>Credit - 6667</p>
       <div class="flex-spacer"></div>
-      <p :class="balanceClass" class="balance">{{ balance }}</p>
+      <p :class="balanceClass" class="balance">${{ balance }}</p>
     </div>
     <p class="smaller">Current Balance</p>
   </main>
@@ -25,7 +25,6 @@ import {computed, ref} from "vue";
 <style scoped>
   main {
     border-bottom: solid 2px var(--header);
-
   }
 
   main p {

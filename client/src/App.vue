@@ -21,9 +21,27 @@
   <main>
     <router-view/>
   </main>
+
+  <footer>
+
+    <h2>Inspired by Marcus by Goldman Sachs.</h2>
+    <h2>Most quotes are from the Marcus app.</h2>
+    <h2>All svg are from https://icons8.com/.</h2>
+    <h2> Not in any way affiliated with Marcus or any other business.</h2>
+    <h2>Created by Sergio Sanchez-Alvares. 2023</h2>
+  </footer>
 </template>
 
 <style scoped>
+  footer {
+    margin-top: 5rem;
+    border-top: solid 2px var(--header);
+  }
+
+  footer h2 {
+    text-align: right;
+  }
+
   .nav-container {
     display: flex;
     justify-content: space-evenly;

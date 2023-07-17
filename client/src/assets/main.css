@@ -20,3 +20,11 @@
     display: flex;
     gap: 2rem;
 }
+
+.button_row {
+    border-top:  solid 1px var(--background-3);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}

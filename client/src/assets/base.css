@@ -93,6 +93,10 @@ input {
 	border-radius: 1rem;
 }
 
+svg {
+	width: 1.5rem;
+	height: 1.5rem;
+}
 svg path {
 	fill: var(--theme);
 }

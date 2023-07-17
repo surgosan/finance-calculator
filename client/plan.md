@@ -33,6 +33,7 @@
 
 12. Click on numbers anywhere to save them
 13. Budgeting
+14. Currency changer. Choose currency. Values update.
 
 ## Home - Overview
 
@@ -47,13 +48,14 @@
 4. Net Worth
 5. 'You spent <$amount> more/less than some day'
 6. EZ money change updater
+7. EZ add account, new transaction
 
 ### Home Cards
 
 1. Net Worth
 2. Expenses so far (month)
 3. Expenses today
-4. So far, you have spend # more/less than last week
+4. So far, you have spent # more/less than last week
 5. Ez input
 
 - Home Layout
