@@ -31,30 +31,30 @@
     <h2>Created by Sergio Sanchez-Alvares. 2023</h2>
   </footer>
 
-  <div class="basic_calculator_wrapper">
-    <button id="calculator_button">Basic Calculator</button>
-    <h2 id="calculator_answer">1578.83</h2>
+  <div class="basic_calculator_wrapper" id="basic_calculator">
+    <button id="calculator_button" @click="toggle_calculator">Basic Calculator</button>
+    <h2 id="calculator_answer">{{ calculator_field }}</h2>
 
     <div class="calculator_buttons">
-      <button>C</button>
-      <button>±</button>
-      <button>%</button>
-      <button>/</button>
-      <button>7</button>
-      <button>8</button>
-      <button>9</button>
-      <button>x</button>
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
-      <button>-</button>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>+</button>
-      <button id="zero">0</button>
-      <button>.</button>
-      <button>=</button>
+      <button id="clear" @click="calculator_clear">C</button>
+      <button id="negative" @click="calculator_negate">±</button>
+      <button id="percentage" @click="calculator_percentage">%</button>
+      <button id="divide">/</button>
+      <button id="seven" @click="calculator_edit(7)">7</button>
+      <button id="eight" @click="calculator_edit(8)">8</button>
+      <button id="nine" @click="calculator_edit(9)">9</button>
+      <button id="multiply">x</button>
+      <button id="four" @click="calculator_edit(4)">4</button>
+      <button id="five" @click="calculator_edit(5)">5</button>
+      <button id="six" @click="calculator_edit(6)">6</button>
+      <button id="subtract">-</button>
+      <button id="one" @click="calculator_edit(1)">1</button>
+      <button id="two" @click="calculator_edit(2)">2</button>
+      <button id="three" @click="calculator_edit(3)">3</button>
+      <button id="add">+</button>
+      <button id="zero" @click="calculator_edit(0)">0</button>
+      <button id="decimal" @click="calculator_edit('.')">.</button>
+      <button id="equals">=</button>
     </div>
   </div>
 </template>
@@ -119,6 +119,7 @@
   }
 
   #calculator_button {
+    cursor: pointer;
     font-size: 1rem;
     letter-spacing: 1px;
     font-weight: bold;
@@ -153,4 +154,36 @@
 </style>
 
 <script setup>
+import {ref} from "vue";
+
+  const calculator_field = ref(0);
+  let calculator_active = false;
+  let calculator_value_one = ref(0);
+  const toggle_calculator = () => {
+    if(!calculator_active) {
+      document.getElementById('basic_calculator').style.bottom = "0";
+      calculator_active = true;
+    }
+    else {
+      document.getElementById('basic_calculator').style.bottom = "-22rem";
+      calculator_active = false;
+    }
+  }
+
+  const calculator_clear = () => {
+    calculator_field.value = 0;
+  }
+
+  const calculator_negate = () => {
+    calculator_field.value = calculator_field.value * -1;
+  }
+
+  const calculator_percentage = () => {
+    calculator_field.value = calculator_field.value / 100;
+  }
+
+  const calculator_edit = (int) => {
+    let concatenated = calculator_field.value.toString() + int.toString();
+    calculator_field.value = parseInt(concatenated);
+  }
 </script>

@@ -82,3 +82,7 @@
 
 1. Setting goals/budgets
 2. Tracker
+
+# After Completion
+
+Add to portfolio as a video
