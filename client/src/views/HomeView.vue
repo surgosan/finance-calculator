@@ -60,8 +60,23 @@
   <div class="snapshot section">
     <h2>{{ month }} Snapshot</h2>
 
-    <div class="pie_wrapper">
-      <Pie class="pie" :data="data" :options="options" />
+    <div class="pie_row">
+
+      <div class="spending_locator">
+        <h3>Where did my money go?</h3>
+
+        <div class="row">
+          <p class="merchant_selector" id="merchant_name">Select a merchant</p>
+          <p class="merchant_selector" id="merchant_time_frame">Time Frame: {{ month }}</p>
+        </div>
+        <p id="merchant_category">Category: General</p>
+        <p id="merchant_spending">Amount: $2500</p>
+      </div>
+
+      <div class="pie_wrapper">
+        <Pie class="pie" :data="data" :options="options" />
+      </div>
+
     </div>
 
   </div>
@@ -96,7 +111,9 @@ const quotes = ["Take control over your finances.",
     "There are lessons everywhere. You just have to choose where to find them.",
     "The best way to predict the future is to create it. - Abraham Lincoln",
     "A journey of a thousand miles must begin with a single step. - Lao Tzu",
-    "Control the outcome of your income."];
+    "Control the outcome of your income.",
+    "Never leave that till tomorrow which you can do today. - Benjamin Franklin",
+    "There is no genius without some madness. - Aristotle"];
 
 
   const randomQuote = () => {
@@ -143,7 +160,35 @@ const quotes = ["Take control over your finances.",
     background: var(--accent);
   }
 
+  .pie_row {
+    display: flex;
+  }
+
+  .spending_locator {
+    width: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .merchant_selector {
+    cursor: pointer;
+    padding: .5rem 1rem;
+    background: var(--background-3);
+    width: fit-content;
+    //border: solid 1px var(--header);
+    border-radius: .5rem;
+    transition: .4s;
+  }
+
+  #merchant_spending {
+    font-weight: bold;
+  }
+
   .pie_wrapper {
+    width: 50%;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -151,6 +196,6 @@ const quotes = ["Take control over your finances.",
   }
 
   .pie {
-    width: 75%;
+    width: 100%;
   }
 </style>
