@@ -30,6 +30,33 @@
     <h2> Not in any way affiliated with Marcus or any other business.</h2>
     <h2>Created by Sergio Sanchez-Alvares. 2023</h2>
   </footer>
+
+  <div class="basic_calculator_wrapper">
+    <button id="calculator_button">Basic Calculator</button>
+    <h2 id="calculator_answer">1578.83</h2>
+
+    <div class="calculator_buttons">
+      <button>C</button>
+      <button>±</button>
+      <button>%</button>
+      <button>/</button>
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button>x</button>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>-</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>+</button>
+      <button id="zero">0</button>
+      <button>.</button>
+      <button>=</button>
+    </div>
+  </div>
 </template>
 
 <style scoped>
@@ -49,7 +76,7 @@
   }
 
   .nav-link {
-    transition: .4s;
+    transition: .2s;
   }
 
   .nav-link:hover {
@@ -67,12 +94,61 @@
   }
 
   main {
-    width: 50dvw;
+    width: 60dvw;
     margin-top: 3rem;
     align-self: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .basic_calculator_wrapper {
+    position: fixed;
+    left: 1rem;
+    bottom: -22rem;
+    width: 18rem;
+    aspect-ratio: 3/4;
+    background: var(--background-2);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-radius: 1rem 1rem 0 0;
+    transition: .7s;
+  }
+
+  #calculator_button {
+    font-size: 1rem;
+    letter-spacing: 1px;
+    font-weight: bold;
+    width: 100%;
+    margin: 0;
+    background: var(--theme);
+    border: none;
+    border-radius: 1rem 1rem 0  0;
+    height: 2rem;
+  }
+
+  #calculator_answer {
+    text-align: right;
+    padding: 0 .5rem;
+  }
+
+  .calculator_buttons {
+    flex-grow: 1;
+    padding-bottom: .1rem;
+    display: grid;
+    gap: .25rem;
+    grid-template-columns: auto auto auto auto;
+  }
+
+  .calculator_buttons > button {
+    font-size: 1rem;
+  }
+
+  #zero {
+    grid-column: span 2;
   }
 </style>
 

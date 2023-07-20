@@ -41,7 +41,7 @@
     <account_balance/>
 
     <div class="button_row">
-      <h3 class="section_button">Add an account</h3>
+      <button class="section_button">Add an account</button>
     </div>
   </div>
 
@@ -51,8 +51,8 @@
     <transaction/>
 
     <div class="button_row">
-      <h3 class="section_button">All Transactions</h3>
-      <h3 class="section_button">New Transaction</h3>
+      <button class="section_button">All Transactions</button>
+      <button class="section_button">New Transaction</button>
     </div>
 <!--    Similar to accounts. Object with name and price, then see all transactions button. Category? Use svg to have an icon for category before text-->
   </div>
@@ -113,7 +113,8 @@ const quotes = ["Take control over your finances.",
     "A journey of a thousand miles must begin with a single step. - Lao Tzu",
     "Control the outcome of your income.",
     "Never leave that till tomorrow which you can do today. - Benjamin Franklin",
-    "There is no genius without some madness. - Aristotle"];
+    "There is no genius without some madness. - Aristotle",
+    "Wealth is the ability to fully experience life. - H.D Thoreau"];
 
 
   const randomQuote = () => {
@@ -134,12 +135,21 @@ const quotes = ["Take control over your finances.",
   }
 
   .section_button {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 1rem .25rem;
     cursor: pointer;
     width: fit-content;
     background: var(--background-3);
-    padding: .25rem 1rem;
-    border-radius: .75rem;
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: .5rem;
     text-align: right;
+    transition: .2s;
+  }
+
+  .section_button:hover {
+    color: var(--theme);
   }
 
   .bar {
@@ -171,6 +181,7 @@ const quotes = ["Take control over your finances.",
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    padding-right: 1rem;
   }
 
   .merchant_selector {
@@ -193,9 +204,10 @@ const quotes = ["Take control over your finances.",
     justify-content: center;
     align-content: center;
     padding-bottom: 3rem;
+    border-left: solid 2px var(--header);
   }
 
   .pie {
-    width: 100%;
+    width: fit-content;
   }
 </style>
