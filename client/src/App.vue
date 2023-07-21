@@ -24,7 +24,7 @@
 
   <footer>
 
-    <h2>Inspired by Marcus by Goldman Sachs.</h2>
+    <h2>Inspired by Marcus from Goldman Sachs.</h2>
     <h2>Most quotes are from the Marcus app.</h2>
     <h2>All svg are from https://icons8.com/.</h2>
     <h2> Not in any way affiliated with Marcus or any other business.</h2>
@@ -33,28 +33,31 @@
 
   <div class="basic_calculator_wrapper" id="basic_calculator">
     <button id="calculator_button" @click="toggle_calculator">Basic Calculator</button>
+    <p id="calculator_reserve">{{  calculator_value_one }}</p>
     <h2 id="calculator_answer">{{ calculator_field }}</h2>
 
     <div class="calculator_buttons">
       <button id="clear" @click="calculator_clear">C</button>
-      <button id="negative" @click="calculator_negate">±</button>
+
       <button id="percentage" @click="calculator_percentage">%</button>
-      <button id="divide">/</button>
+      <button id="negative" @click="calculator_backspace">&lt;</button>
+      <button id="divide" @click="calculator_function('/')">/</button>
       <button id="seven" @click="calculator_edit(7)">7</button>
       <button id="eight" @click="calculator_edit(8)">8</button>
       <button id="nine" @click="calculator_edit(9)">9</button>
-      <button id="multiply">x</button>
+      <button id="multiply" @click="calculator_function('*')">x</button>
       <button id="four" @click="calculator_edit(4)">4</button>
       <button id="five" @click="calculator_edit(5)">5</button>
       <button id="six" @click="calculator_edit(6)">6</button>
-      <button id="subtract">-</button>
+      <button id="subtract" @click="calculator_function('-')">-</button>
       <button id="one" @click="calculator_edit(1)">1</button>
       <button id="two" @click="calculator_edit(2)">2</button>
       <button id="three" @click="calculator_edit(3)">3</button>
-      <button id="add">+</button>
+      <button id="add" @click="calculator_function('+')">+</button>
       <button id="zero" @click="calculator_edit(0)">0</button>
+      <button id="negative" @click="calculator_negate">±</button>
       <button id="decimal" @click="calculator_edit('.')">.</button>
-      <button id="equals">=</button>
+      <button id="equals" @click="solve">=</button>
     </div>
   </div>
 </template>
@@ -131,9 +134,16 @@
     height: 2rem;
   }
 
+  #calculator_reserve {
+    padding: .1rem 1rem 0 0;
+    margin: 0;
+    text-align: right;
+  }
+
   #calculator_answer {
     text-align: right;
     padding: 0 .5rem;
+    margin: .5rem;
   }
 
   .calculator_buttons {
@@ -147,18 +157,15 @@
   .calculator_buttons > button {
     font-size: 1rem;
   }
-
-  #zero {
-    grid-column: span 2;
-  }
 </style>
 
 <script setup>
 import {ref} from "vue";
 
-  const calculator_field = ref(0);
+const calculator_field = ref("0");
   let calculator_active = false;
-  let calculator_value_one = ref(0);
+  let calculator_value_one = ref("");
+
   const toggle_calculator = () => {
     if(!calculator_active) {
       document.getElementById('basic_calculator').style.bottom = "0";
@@ -169,9 +176,18 @@ import {ref} from "vue";
       calculator_active = false;
     }
   }
-
   const calculator_clear = () => {
-    calculator_field.value = 0;
+    calculator_field.value = "0";
+    calculator_value_one.value = "";
+  }
+
+  const calculator_backspace = () => {
+    let text = calculator_field.value.toString();
+    calculator_field.value = text.substring(0, text.length-1);
+
+    if(calculator_field.value.length === 0 || calculator_field.value === '-') {
+      calculator_field.value = "0";
+    }
   }
 
   const calculator_negate = () => {
@@ -182,8 +198,57 @@ import {ref} from "vue";
     calculator_field.value = calculator_field.value / 100;
   }
 
-  const calculator_edit = (int) => {
-    let concatenated = calculator_field.value.toString() + int.toString();
-    calculator_field.value = parseInt(concatenated);
+  const calculator_edit = (input) => {
+    if(calculator_field.value === "0")
+    {
+      calculator_field.value = input.toString();
+    }
+    else {
+      calculator_field.value = calculator_field.value + input.toString();
+    }
   }
+
+  const calculator_function = (operator) => {
+    calculator_value_one.value = calculator_field.value + ` ${operator }`;
+    calculator_field.value = "0";
+  }
+
+  const solve = () => {
+    let answer = eval(calculator_value_one.value + calculator_field.value);
+    calculator_field.value = answer.toString();
+    calculator_value_one.value = "";
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if(calculator_active) {
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach((button) => button.blur());
+
+      const pressedKey = event.key;
+
+      if (!isNaN(pressedKey)) {
+        calculator_edit([pressedKey]);
+      }
+
+      if (['+', '-', '*', '/'].includes(pressedKey)) {
+        calculator_function([pressedKey])
+      }
+
+      if (pressedKey === '%') {
+        calculator_function([pressedKey]);
+      }
+
+      if (pressedKey === 'Enter') {
+        solve();
+      }
+
+      if (pressedKey === 'Backspace') {
+        calculator_backspace();
+      }
+
+      if (pressedKey === 'c' || pressedKey === 'C') {
+        calculator_clear();
+      }
+    }
+});
 </script>
