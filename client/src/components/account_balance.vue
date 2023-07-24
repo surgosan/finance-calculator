@@ -18,7 +18,7 @@ import {computed, ref} from "vue";
       <div class="flex-spacer"></div>
       <p :class="balanceClass" class="balance">${{ balance }}</p>
     </div>
-    <p class="smaller">Current Balance</p>
+    <p class="smaller">Credit Card</p>
   </main>
 </template>
 

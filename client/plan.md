@@ -69,6 +69,32 @@
 - Latest 5 transactions
 - Biggest Transaction this month
 
+# Home Page
+
+1. Welcome
+2. Net Worth
+3. Assets to Liabilities
+4. Accounts
+5. Latest Transactions
+6. Snapshot
+
+- Basic Calculator
+  - Typing allowed when active
+
+- Dialogs
+  - For Accounts and Transactions
+  - Accounts
+    - Name
+    - Last 4 digits if card
+    - Balance
+    - Asset or Liability
+    - Type of account (bank, loan, mortgage)
+  - Transactions
+    - Name
+    - Category
+    - Transaction amount (if negative = liability)
+    - Account affected
+
 ## Calculator Page
 
 ## Investments Page
@@ -82,6 +108,19 @@
 
 1. Setting goals/budgets
 2. Tracker
+
+## Database Models
+
+- User
+  - First Name
+  - Last Name
+  - Monthly Income
+  - username
+  - password
+
+# Fixes
+
+None atm
 
 # After Completion
 

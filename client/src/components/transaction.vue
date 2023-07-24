@@ -31,7 +31,7 @@
   <main>
     <div class="row">
       <svg viewBox="0,0,256,256" fill-rule="nonzero"><g transform="translate(-10.24,-10.24) scale(1.08,1.08)"><g fill="#000000" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path :d="svg_icon"></path></g></g></g></svg>
-      <p>Store 1</p>
+      <p>Store 1| Credit</p>
       <div class="flex-spacer"></div>
       <p :class="balanceClass" class="balance">${{ transaction }}</p>
     </div>

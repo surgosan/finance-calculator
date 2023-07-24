@@ -1,5 +1,4 @@
 <template>
-
   <h2>Welcome {{ user_first_name }}</h2>
 
   <h1 id="quote">{{ quote_tile }}</h1>
@@ -41,9 +40,129 @@
     <account_balance/>
 
     <div class="button_row">
-      <button class="section_button">Add an account</button>
+      <button class="section_button" @click="toggleAccount">Add an account</button>
     </div>
   </div>
+
+  <teleport to="body" v-if="account_dialog">
+    <div id="dialog_shroud"></div>
+  </teleport>
+
+  <teleport to="body" v-if="account_dialog">
+
+    <div class="dialog" id="account_dialog">
+      <div class="dialog_title">
+        <h1>Add an Account</h1>
+        <button class="dialog_button" @click="toggleAccount">Close</button>
+      </div>
+
+      <div class="row">
+
+        <div class="dialog_column right_column">
+
+          <p id="account_type">Type of Account</p>
+
+          <div  class="radio_row"  id="middle_column">
+            <input type="radio" id="account_auto" class="account_type_radio account_liability" name="account_type">
+            <label class="dialog_label  radio_label" for="account_auto">Auto Loan</label>
+          </div>
+
+          <div  class="radio_row">
+            <input type="radio" id="account_cash" class="account_type_radio" name="account_type">
+            <label class="dialog_label  radio_label" for="account_cash">Cash Balance</label>
+          </div>
+
+          <div  class="radio_row">
+            <input type="radio" id="account_checking" class="account_type_radio account_digits" name="account_type">
+            <label class="dialog_label  radio_label" for="account_checking">Checking Account</label>
+          </div>
+
+          <div  class="radio_row">
+            <input type="radio" id="account_credit" class="account_type_radio account_liability account_digits" name="account_type">
+            <label class="dialog_label  radio_label" for="account_credit">Credit Card</label>
+          </div>
+
+          <div  class="radio_row">
+            <input type="radio" id="account_investment" class="account_type_radio account_digits" name="account_type">
+            <label class="dialog_label  radio_label" for="account_investment">Investment Account</label>
+          </div>
+
+          <div  class="radio_row">
+            <input type="radio" id="account_medical" class="account_type_radio account_liability" name="account_type">
+            <label class="dialog_label  radio_label" for="account_medical">Medical Bill</label>
+          </div>
+
+          <div  class="radio_row">
+            <input type="radio" id="account_mortgage" class="account_type_radio account_liability account_digits" name="account_type">
+            <label class="dialog_label  radio_label" for="account_mortgage">Mortgage</label>
+          </div>
+
+          <div  class="radio_row">
+            <input type="radio" id="account_payable" class="account_type_radio" name="account_type">
+            <label class="dialog_label  radio_label" for="account_payable">Payable</label>
+          </div>
+
+          <div  class="radio_row">
+            <input type="radio" id="account_personal" class="account_type_radio account_liability" name="account_type">
+            <label class="dialog_label  radio_label" for="account_personal">Personal Loans</label>
+          </div>
+        </div>
+
+        <div class="dialog_column right_most_column">
+          <div  class="radio_row">
+            <input type="radio" id="account_real_estate" class="account_type_radio" name="account_type">
+            <label class="dialog_label  radio_label" for="account_real_estate">Real Estate</label>
+          </div>
+
+          <div  class="radio_row">
+            <input type="radio" id="account_retirement" class="account_type_radio account_digits" name="account_type">
+            <label class="dialog_label  radio_label" for="account_retirement">Retirement Account</label>
+          </div>
+
+          <div  class="radio_row">
+            <input type="radio" id="account_savings" class="account_type_radio account_digits" name="account_type">
+            <label class="dialog_label  radio_label" for="account_savings">Savings Account</label>
+          </div>
+
+          <div  class="radio_row">
+            <input type="radio" id="account_student" class="account_type_radio account_liability" name="account_type">
+            <label class="dialog_label  radio_label" for="account_student">Student Loan</label>
+          </div>
+
+          <div  class="radio_row">
+            <input type="radio" id="account_taxes" class="account_type_radio account_liability" name="account_type">
+            <label class="dialog_label  radio_label" for="account_taxes">Taxes Owed</label>
+          </div>
+
+          <div  class="radio_row">
+            <input type="radio" id="account_other" class="account_type_radio account_other" name="account_type">
+            <label class="dialog_label  radio_other" for="account_other">Other</label>
+          </div>
+        </div>
+
+<!--        Split-->
+
+        <div class="dialog_column left_column">
+          <label class="dialog_label" for="account_name">Account Name</label>
+          <input type="text" id="account_name">
+
+
+          <div class="radio_row liability_selector">
+            <input class="account_liability" type="checkbox" id="account_asset">
+            <label class="dialog_label" for="account_asset">Liability?</label>
+          </div>
+
+          <label class="dialog_label account_default_payment_class" for="account_default_payment">Default Payment</label>
+          <input class="account_default_payment_class" type="number" id="account_default_payment">
+
+          <label class="dialog_label account_digits_input" for="account_digits">Last Four Digits</label>
+          <input class="account_digits_input" type="number" id="account_digits">
+        </div>
+      </div>
+
+      <button class="dialog_button" type="submit">Add Account</button>
+    </div>
+  </teleport>
 
   <div class="transactions section">
     <h2>Latest Transactions</h2>
@@ -54,7 +173,6 @@
       <button class="section_button">All Transactions</button>
       <button class="section_button">New Transaction</button>
     </div>
-<!--    Similar to accounts. Object with name and price, then see all transactions button. Category? Use svg to have an icon for category before text-->
   </div>
 
   <div class="snapshot section">
@@ -95,6 +213,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const user_first_name = ref("Sergio");
 const quote_tile = ref("");
+  const account_dialog = ref(false);
 
 const currentDate = new Date();
 const month = currentDate.toLocaleString('default', { month: 'long' });
@@ -116,13 +235,37 @@ const quotes = ["Take control over your finances.",
     "There is no genius without some madness. - Aristotle",
     "Wealth is the ability to fully experience life. - H.D Thoreau"];
 
+const toggleAccount = () => {
+  account_dialog.value = !account_dialog.value;
+
+  if(account_dialog.value)
+  {
+    setTimeout(() => {
+      dialogWidth();
+    }, 100);
+  }
+
+//   Clear values
+}
+
 
   const randomQuote = () => {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     quote_tile.value = quotes[randomIndex];
   }
 
-  onMounted(randomQuote);
+const dialogWidth = () => {
+  const computedWidth = getComputedStyle(document.getElementById('account_dialog')).width;
+  const columnComputedWidth = getComputedStyle(document.getElementById('middle_column')).width;
+
+  document.getElementById('account_dialog').style.width = `calc(${computedWidth} + 6rem)`;
+  document.getElementById('middle_column').style.width = `calc(${columnComputedWidth} + 2rem)`;
+};
+
+
+  onMounted(() => {
+    randomQuote();
+  })
 </script>
 
 <style scoped>
@@ -170,6 +313,10 @@ const quotes = ["Take control over your finances.",
     background: var(--accent);
   }
 
+  .snapshot {
+    padding-bottom: 2rem;
+  }
+
   .pie_row {
     display: flex;
   }
@@ -210,4 +357,111 @@ const quotes = ["Take control over your finances.",
   .pie {
     width: fit-content;
   }
+
+  #dialog_shroud {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--background);
+    opacity: .7 ;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+  }
+
+  .dialog {
+    display: flex;
+    flex-direction: column;
+    background: var(--background-2);
+    padding: 2rem;
+    border-radius: 1rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+  }
+
+  .dialog_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dialog_column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dialog_label {
+    font-weight: bold;
+  }
+
+  #account_type {
+    font-weight: bold;
+  }
+
+  .radio_label {
+    font-weight: initial;
+  }
+
+  .account_type_radio {
+    border-radius: 0;
+  }
+
+  .account_default_payment_class, .liability_selector, .account_digits_input {
+    display: none;
+  }
+
+  .account_type_radio:checked + label {
+    font-weight: bold;
+    color: var(--accent);
+  }
+
+  .left_column {
+    order: 1;
+  }
+
+  .right_column {
+    order: 2;
+  }
+
+  .right_most_column {
+    order: 3;
+    padding-top: 3.5rem;
+  }
+
+  .dialog_column:has(.radio_row):has(.account_liability:checked) ~ .left_column > .account_default_payment_class {
+    display: initial;
+  }
+   .dialog_column:has(.radio_row):has(.account_digits:checked) ~ .left_column > .account_digits_input {
+    display: initial;
+  }
+
+   .dialog_column:has(.radio_row):has(.account_other:checked) ~ .left_column > .liability_selector {
+      display: initial;
+    }
+
+   .liability_selector:has(.account_liability:checked) ~ .account_default_payment_class {
+     display: initial;
+   }
+
+
+
+   .dialog_button {
+     cursor: pointer;
+     width: fit-content;
+     font-size: 1rem;
+     font-weight: bold;
+     padding: .5rem 1rem;
+     background: var(--background-3);
+     margin-top: 1rem;
+     align-self: flex-end;
+     border: none;
+   }
+
+   .dialog_button:hover {
+     color: var(--theme);
+   }
+
 </style>

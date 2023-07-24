@@ -226,7 +226,7 @@ const calculator_field = ref("0");
 
       const pressedKey = event.key;
 
-      if (!isNaN(pressedKey)) {
+      if (!isNaN(pressedKey) || pressedKey === '.') {
         calculator_edit([pressedKey]);
       }
 
