@@ -45,7 +45,7 @@
   </div>
 
   <teleport to="body" v-if="account_dialog || transaction_dialog">
-    <div id="dialog_shroud"></div>
+    <div id="dialog_shroud" @click="shroudToggle"></div>
   </teleport>
 
   <teleport to="body" v-if="account_dialog">
@@ -170,7 +170,7 @@
   <div class="transactions section">
     <h2>Latest Transactions</h2>
 
-    <transaction/>
+    <transaction class="transaction"/>
 
     <div class="button_row">
       <button class="section_button">All Transactions</button>
@@ -282,8 +282,8 @@
         <div class="dialog_column left_column">
           <h2>Info</h2>
 
-          <label class="dialog_label" for="transaction_name">Name</label>
-          <input type="text" id="transaction_name" maxlength="50" placeholder="Headphones">
+          <label class="dialog_label" for="transaction_name">Name or Merchant</label>
+          <input type="text" id="transaction_name" maxlength="50" placeholder="Headphones | Best Buy">
 
           <label class="dialog_label" for="transaction_date">Transaction Date</label>
           <input type="date" id="transaction_date">
@@ -330,13 +330,13 @@
 
 <script setup>
 import {onMounted, ref} from "vue";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import { Pie } from 'vue-chartjs';
 import {data, options} from '@/assets/snapshot_data';
 import Account_balance from "@/components/account_balance.vue";
 import Transaction from "@/components/transaction.vue";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
 const user_first_name = ref("Sergio");
 const quote_tile = ref("");
@@ -384,6 +384,8 @@ const toggleTransactions = () => {
     }, 1);
   }
 }
+
+const shroudToggle = () => { account_dialog.value = false; transaction_dialog.value = false;};
 
 
   const randomQuote = () => {
@@ -460,6 +462,15 @@ const transactionWidth = () => {
     background: var(--accent);
   }
 
+  .transaction {
+    transition: .5s;
+  }
+
+  .transaction:hover {
+    scale: 1.008;
+    translate: 0 -1px;
+  }
+
   .snapshot {
     padding-bottom: 2rem;
   }
@@ -498,7 +509,7 @@ const transactionWidth = () => {
     justify-content: center;
     align-content: center;
     padding-bottom: 3rem;
-    border-left: solid 2px var(--header);
+    border-left: solid 2px var(--accent);
   }
 
   .pie {
