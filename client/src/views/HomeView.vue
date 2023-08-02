@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  <teleport to="body" v-if="account_dialog">
+  <teleport to="body" v-if="account_dialog || transaction_dialog">
     <div id="dialog_shroud"></div>
   </teleport>
 
@@ -93,7 +93,7 @@
           </div>
 
           <div  class="radio_row">
-            <input type="radio" id="account_mortgage" class="account_type_radio account_liability account_digits" name="account_type">
+            <input type="radio" id="account_mortgage" class="account_type_radio account_liability" name="account_type">
             <label class="dialog_label  radio_label" for="account_mortgage">Mortgage</label>
           </div>
 
@@ -144,7 +144,7 @@
 
         <div class="dialog_column left_column">
           <label class="dialog_label" for="account_name">Account Name</label>
-          <input type="text" id="account_name">
+          <input type="text" id="account_name" placeholder="Amex Gold Card">
 
 
           <div class="radio_row liability_selector">
@@ -153,10 +153,13 @@
           </div>
 
           <label class="dialog_label account_default_payment_class" for="account_default_payment">Default Payment</label>
-          <input class="account_default_payment_class" type="number" id="account_default_payment">
+          <input class="account_default_payment_class" type="number" id="account_default_payment" placeholder="$217.85">
 
           <label class="dialog_label account_digits_input" for="account_digits">Last Four Digits</label>
-          <input class="account_digits_input" type="number" id="account_digits">
+          <input class="account_digits_input" type="number" id="account_digits" placeholder="1234">
+
+          <label class="dialog_label account_balance_input" for="account_balance">Current Balance</label>
+          <input class="account_balance_input" type="number" id="account_balance" placeholder="$1250.11">
         </div>
       </div>
 
@@ -171,9 +174,133 @@
 
     <div class="button_row">
       <button class="section_button">All Transactions</button>
-      <button class="section_button">New Transaction</button>
+      <button class="section_button" @click="toggleTransactions">New Transaction</button>
     </div>
   </div>
+
+  <teleport to="body">
+    <div class="dialog" id="transactions_dialog" v-if="transaction_dialog">
+
+      <div class="dialog_title">
+        <h1>New Transaction</h1>
+        <button class="dialog_button" @click="toggleTransactions">Close</button>
+      </div>
+
+      <div class="row">
+
+        <div class="dialog_column" id="transaction_categories_two">
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_health" type="radio" name="transaction_category">
+            <label class="radio_label" for="transaction_health">Health</label>
+          </div>
+
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_income" type="radio" name="transaction_category">
+            <label class="radio_label" for="transaction_income">Income</label>
+          </div>
+
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_insurance" type="radio" name="transaction_category">
+            <label class="radio_label" for="transaction_insurance">Insurance</label>
+          </div>
+
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_personal" type="radio" name="transaction_category">
+            <label class="radio_label" for="transaction_personal">Personal</label>
+          </div>
+
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_transfer" type="radio" name="transaction_category">
+            <label class="radio_label transaction_transfer" for="transaction_transfer">Transfer</label>
+          </div>
+
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_transportation" type="radio" name="transaction_category">
+            <label class="radio_label" for="transaction_transportation">Transportation</label>
+          </div>
+
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_travel" type="radio" name="transaction_category">
+            <label class="radio_label" for="transaction_travel">Travel</label>
+          </div>
+        </div>
+
+        <div class="dialog_column right_column_two" id="transaction_categories">
+
+          <h2>Category</h2>
+
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_general" type="radio" name="transaction_category">
+            <label class="radio_label" for="transaction_general">General</label>
+          </div>
+
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_business" type="radio" name="transaction_category">
+            <label class="radio_label" for="transaction_business">Business</label>
+          </div>
+
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_education" type="radio" name="transaction_category">
+            <label class="radio_label" for="transaction_education">Education</label>
+          </div>
+
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_finance" type="radio" name="transaction_category">
+            <label class="radio_label" for="transaction_finance">Finance / Bills</label>
+          </div>
+
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_entertainment" type="radio" name="transaction_category">
+            <label class="radio_label" for="transaction_entertainment">Entertainment</label>
+          </div>
+
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_giving" type="radio" name="transaction_category">
+            <label class="radio_label" for="transaction_giving">Giving</label>
+          </div>
+
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_groceries" type="radio" name="transaction_category">
+            <label class="radio_label" for="transaction_groceries">Groceries</label>
+          </div>
+
+          <div class="radio_row">
+            <input class="transaction_radio"  id="transaction_home" type="radio" name="transaction_category">
+            <label class="radio_label" for="transaction_home">Home</label>
+          </div>
+        </div>
+
+        <div class="dialog_column right_column" id="transaction_accounts">
+          <h2>Account</h2>
+
+          <div class="radio_row">
+            <input class="transaction_radio" id="amex" type="radio" name="transaction_account">
+            <label class="radio_label" for="amex">Amex Gold</label>
+          </div>
+        </div>
+
+        <div class="dialog_column left_column">
+          <h2>Info</h2>
+
+          <label class="dialog_label" for="transaction_name">Name</label>
+          <input type="text" id="transaction_name" maxlength="50" placeholder="Headphones">
+
+          <label class="dialog_label" for="transaction_date">Transaction Date</label>
+          <input type="date" id="transaction_date">
+
+          <label class="dialog_label" for="transaction_amount">Transaction Amount</label>
+          <input type="number" id="transaction_amount" placeholder="237.43">
+
+          <label class="dialog_label" for="transaction_note">Note</label>
+          <input type="text" id="transaction_note" maxlength="255" placeholder="My new favorites!!!">
+        </div>
+
+      </div>
+
+      <button class="dialog_button" type="submit">Confirm Transaction</button>
+    </div>
+  </teleport>
+
 
   <div class="snapshot section">
     <h2>{{ month }} Snapshot</h2>
@@ -213,7 +340,8 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const user_first_name = ref("Sergio");
 const quote_tile = ref("");
-  const account_dialog = ref(false);
+const account_dialog = ref(false);
+const transaction_dialog = ref(false);
 
 const currentDate = new Date();
 const month = currentDate.toLocaleString('default', { month: 'long' });
@@ -242,10 +370,19 @@ const toggleAccount = () => {
   {
     setTimeout(() => {
       dialogWidth();
-    }, 100);
+    }, 1);
   }
+}
 
-//   Clear values
+const toggleTransactions = () => {
+  transaction_dialog.value = !transaction_dialog.value;
+
+  if(transaction_dialog.value)
+  {
+    setTimeout(() => {
+      transactionWidth();
+    }, 1);
+  }
 }
 
 
@@ -261,6 +398,16 @@ const dialogWidth = () => {
   document.getElementById('account_dialog').style.width = `calc(${computedWidth} + 6rem)`;
   document.getElementById('middle_column').style.width = `calc(${columnComputedWidth} + 2rem)`;
 };
+
+const transactionWidth = () => {
+  const dialogWidth = getComputedStyle(document.getElementById('transactions_dialog')).width;
+  const columnWidth = getComputedStyle(document.getElementById('transaction_accounts')).width;
+  const categoryWidth = getComputedStyle(document.getElementById('transaction_categories')).width;
+
+  document.getElementById('transactions_dialog').style.width=`calc(${dialogWidth} + 6rem`;
+  document.getElementById('transaction_accounts').style.width = `calc(${columnWidth} + 2rem`;
+  document.getElementById('transaction_categories').style.width = `calc(${categoryWidth} + 2rem`;
+}
 
 
   onMounted(() => {
@@ -382,10 +529,14 @@ const dialogWidth = () => {
     translate: -50% -50%;
   }
 
+  #transactions_dialog {
+    z-index: 1;
+  }
+
   .dialog_title {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .dialog_column {
@@ -413,7 +564,7 @@ const dialogWidth = () => {
     display: none;
   }
 
-  .account_type_radio:checked + label {
+  .account_type_radio:checked + label, .transaction_radio:checked + label {
     font-weight: bold;
     color: var(--accent);
   }
@@ -431,6 +582,15 @@ const dialogWidth = () => {
     padding-top: 3.5rem;
   }
 
+  .right_column_two {
+    order: 3;
+  }
+
+  #transaction_categories_two {
+    order: 4;
+    padding-top: 4.5rem;
+}
+
   .dialog_column:has(.radio_row):has(.account_liability:checked) ~ .left_column > .account_default_payment_class {
     display: initial;
   }
@@ -445,8 +605,6 @@ const dialogWidth = () => {
    .liability_selector:has(.account_liability:checked) ~ .account_default_payment_class {
      display: initial;
    }
-
-
 
    .dialog_button {
      cursor: pointer;
