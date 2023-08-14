@@ -1,7 +1,11 @@
 .DS_Store
-client/node_modules
+node_modules
 /dist
 
+package.json
+package-lock.json
+Finance PlanetScale Key.txt
+Server/Finance PlanetScale Key.txt
 
 # local env files
 .env.local
