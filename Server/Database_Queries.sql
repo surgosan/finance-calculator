@@ -1,23 +1,29 @@
 CREATE TABLE Account (
-    name VARCHAR(25) PRIMARY KEY,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(25),
     type INT NOT NULL,
     balance DOUBLE NOT NULL,
-    liability BOOLEAN NOT NULL
+    liability BOOLEAN NOT NULL,
+    user_id INT NOT NULL
 );
 
+
+-- Create user id int link which references USER id
 CREATE TABLE Transaction (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     date DATE NOT NULL,
     amount DOUBLE NOT NULL,
     note TEXT,
     category INT NOT NULL,
     account VARCHAR(25) NOT NULL,
-    account_recipient VARCHAR(25)
+    account_recipient INT,
+    user_id INT NOT NULL
 );
 
 
 CREATE TABLE User (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     username VARCHAR(50) PRIMARY KEY,
     password VARCHAR(50) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
