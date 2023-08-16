@@ -1,3 +1,5 @@
+// noinspection JSValidateTypes
+
 const Sequelize = require('sequelize');
 
 const username = process.env.USERNAME;

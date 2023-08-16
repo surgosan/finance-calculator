@@ -5,7 +5,6 @@ node_modules
 package.json
 package-lock.json
 Finance PlanetScale Key.txt
-Server/Finance PlanetScale Key.txt
 
 # local env files
 .env.local
