@@ -47,6 +47,12 @@ const Transaction = database.define('Transaction',
             type: DataTypes.INTEGER,
             allowNull: false
         }
+    },
+    {
+        timestamps: false,
+        freezeTableName: true,
+        modelName: "Transaction",
+        tableName: "Transaction"
     })
 
 module.exports = Transaction;

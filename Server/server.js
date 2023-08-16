@@ -3,11 +3,10 @@ const database = require('./db_connection');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
 const app = express();
 app.use(bodyParser.json());
 app.use(cors())
-    // require('./routes')(app);
+require('./routes')(app);
 const port = 8081;
 
 app.use(function(req, res, next) {
@@ -19,9 +18,9 @@ app.use(function(req, res, next) {
 
 database.sync()
     .then(() => {
-        console.log("Connected");
+        console.log("Connected and Synced");
 
         app.listen(port, () => {
             console.log(`Server is running on port ${port}`);
         });
-    });
+});

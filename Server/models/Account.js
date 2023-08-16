@@ -29,6 +29,12 @@ const Account = database.define('Account',
             type: DataTypes.TINYINT(1),
             allowNull: false
         }
+    },
+    {
+        timestamps: false,
+        freezeTableName: true,
+        modelName: "Account",
+        tableName: 'Account'
     })
 
 module.exports = Account;
