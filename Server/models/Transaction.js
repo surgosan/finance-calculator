@@ -1,4 +1,4 @@
-const { DataTypes} = require('sequelize');
+const { DataTypes, Sequelize} = require('sequelize');
 const database = require('../db_connection');
 
 const Transaction = database.define('Transaction',
@@ -17,7 +17,7 @@ const Transaction = database.define('Transaction',
 
         date: {
             type: DataTypes.DATE,
-            allowNull: false
+            defaultValue: Sequelize.fn('NOW')
         },
 
         amount: {

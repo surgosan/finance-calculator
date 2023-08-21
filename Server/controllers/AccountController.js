@@ -54,6 +54,15 @@ module.exports = {
         }
     },
 
+    async getAccount(id)
+    {
+        try {
+            return await Account.findByPk(id);
+        } catch {
+            return null;
+        }
+    },
+
     async editAccount (req, res) {
         try {
             const { id } = req.body;

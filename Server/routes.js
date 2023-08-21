@@ -1,4 +1,5 @@
 const AccountController = require('./controllers/AccountController');
+const TransactionController = require('./controllers/TransactionController');
 
 module.exports = (app) => {
     app.get('/account/display', AccountController.displayAccounts);
@@ -6,4 +7,6 @@ module.exports = (app) => {
     app.post('/account/fetch', AccountController.fetchAccount);
     app.delete('/account/destroy', AccountController.deleteAccount);
     app.put('/account/edit', AccountController.editAccount);
+
+    app.post('/transaction/new', TransactionController.newTransaction);
 }
