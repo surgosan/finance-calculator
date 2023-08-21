@@ -26,6 +26,15 @@ const errors = {
             message: message || 'Internal Server Error',
         };
     },
+
+    errorHandler: (res, error, message) => {
+        const errorMessage = error.message || message;
+        const errorResponse = errors.internalServerError(errorMessage);
+
+        res.status(errorResponse.status).send({
+            error: errorResponse.message
+        })
+    }
 };
 
 module.exports = errors;
