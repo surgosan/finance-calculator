@@ -28,6 +28,11 @@ const Account = database.define('Account',
         liability: {
             type: DataTypes.TINYINT(1),
             allowNull: false
+        },
+        user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            default: -1
         }
     },
     {
