@@ -30,6 +30,15 @@ const errors = {
     errorHandler: (res, error, message) => {
         const errorMessage = error.message || message;
         const errorResponse = errors.internalServerError(errorMessage);
+        const errorStatus = error.status || errorResponse.status;
+
+        res.status(errorStatus).send({
+            error: errorResponse.message
+        })
+    },
+
+    emptyReturn: (res, message) => {
+        const errorResponse = errors.notFound(message);
 
         res.status(errorResponse.status).send({
             error: errorResponse.message

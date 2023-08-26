@@ -17,11 +17,11 @@
   - Get transactions X\*10 through (X\*10) + 10.
   - I.E: X=0 so 0 through 10. | X=1, so 10 through 20.
 - **POST** => Get transactions by Account#.
-- **POST** => Get transactions by Account# in sets of 10.
 - **POST** => Get transactions by date range
 - **POST** => New Transaction
 - **POST** => Get Transaction by ID
 - **DELETE** => Delete transaction by ID
+- **DELETE** => Delete transactions by Account or Recipient
 - **PUT** => Edit transaction
 
 # User Functions
