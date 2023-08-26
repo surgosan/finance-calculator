@@ -8,5 +8,7 @@ module.exports = (app) => {
     app.delete('/account/destroy', AccountController.deleteAccount);
     app.put('/account/edit', AccountController.editAccount);
 
+    app.get('/transaction/display', TransactionController.getTransactions);
+    app.post('/transaction/pages', TransactionController.transactionPages);
     app.post('/transaction/new', TransactionController.newTransaction);
 }
