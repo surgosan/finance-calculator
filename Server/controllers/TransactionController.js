@@ -1,4 +1,4 @@
-// noinspection JSCheckFunctionSignatures
+// noinspection JSCheckFunctionSignatures,ExceptionCaughtLocallyJS
 
 const {Transaction} = require('../models');
 const AccountController = require('./AccountController');
