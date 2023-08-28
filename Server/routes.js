@@ -1,5 +1,6 @@
 const AccountController = require('./controllers/AccountController');
 const TransactionController = require('./controllers/TransactionController');
+const UserController = require('./controllers/UserController');
 
 module.exports = (app) => {
     app.get('/account/display', AccountController.displayAccounts);
@@ -17,4 +18,11 @@ module.exports = (app) => {
     app.delete('/transaction/deleteById', TransactionController.deleteById);
     app.delete('/transaction/deleteByAccount', TransactionController.deleteByAccount);
     app.put('/transaction/edit', TransactionController.editTransaction);
+
+    app.get('/user/fetch', UserController.getUsers);
+    app.post('/user/byId', UserController.getById);
+    app.post('/user/new', UserController.newUser);
+    app.post('/user/verify', UserController.verifyUser);
+    app.delete('/user/delete', UserController.deleteUser);
+    app.put('/user/edit', UserController.editUser);
 }

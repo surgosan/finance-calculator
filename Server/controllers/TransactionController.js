@@ -62,6 +62,10 @@ module.exports = {
         } catch (error) { errors.errorHandler(res, error, 'Could not fetch transactions.') }
     },
 
+    async getTransactionByAccount (req, res) {
+
+    },
+
     async getTransactionsByDate (req, res) {
         try {
             const { dateStart, dateEnd } = req.body;
