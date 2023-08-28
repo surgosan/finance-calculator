@@ -57,9 +57,17 @@ nav a {
 }
 
 button {
-	background: var(--background);
-	border: solid 1px var(--header);
+	cursor: pointer;
+	background: var(--background-3);
+	border: none;
+	font-weight: bold;
+	padding: .5rem 1rem;
 	border-radius: 5px;
+	transition: .3s;
+}
+
+button:hover {
+	color: var(--theme);
 }
 
 h1, h2, button, h3, label {

@@ -318,9 +318,8 @@
         <p id="merchant_spending">Amount: $2500</p>
       </div>
 
-      <div class="pie_wrapper">
-        <Pie class="pie" :data="data" :options="options" />
-      </div>
+      <PieChart/>
+
 
     </div>
 
@@ -330,13 +329,9 @@
 
 <script setup>
 import {onMounted, ref} from "vue";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
-import { Pie } from 'vue-chartjs';
-import {data, options} from '@/assets/snapshot_data';
 import Account_balance from "@/components/account_balance.vue";
 import Transaction from "@/components/transaction.vue";
-
-ChartJS.register(ArcElement, Tooltip, Legend, Title);
+import PieChart from "@/components/PieChart.vue";
 
 const user_first_name = ref("Sergio");
 const quote_tile = ref("");
@@ -512,21 +507,7 @@ const transactionWidth = () => {
     border-left: solid 2px var(--accent);
   }
 
-  .pie {
-    width: fit-content;
-  }
 
-  #dialog_shroud {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: var(--background);
-    opacity: .7 ;
-    position: fixed;
-    top: 0;
-    left: 0;
-
-  }
 
   .dialog {
     display: flex;

@@ -4,7 +4,7 @@
     <div class="nav-container">
       <h1>Multi-Function Finance Application</h1>
       <span class="flex-spacer"></span>
-      <router-link class="profile" to="/"></router-link>
+      <button class="profile" @click="toggleUserMenu"></button>
     </div>
 
     <div class="nav-container">
@@ -19,6 +19,18 @@
   </nav>
 
   <main>
+    <div id="dialog_shroud" @click="shroudToggle" v-if="userMenu"></div>
+    <teleport to="body" v-if="userMenu">
+      <div class="user_menu">
+        <div id="user_menu_head">
+          <h1 id="user_menu_title">User Menu</h1>
+          <div class="flex-spacer"></div>
+          <button id="user_menu_close" @click="toggleUserMenu">Close</button>
+        </div>
+        <signIn/>
+      </div>
+    </teleport>
+
     <router-view/>
   </main>
 
@@ -157,15 +169,43 @@
   .calculator_buttons > button {
     font-size: 1rem;
   }
+
+  .user_menu {
+    background: var(--background-2);
+    padding: 2rem;
+    border-radius: 1rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    transition: .5s;
+  }
+
+  #user_menu_head {
+    display: flex;
+  }
+
+  #user_menu_title {
+    text-decoration: solid var(--header) underline;
+    text-underline-offset: .5rem;
+  }
+
+  #user_menu_close {
+    height: fit-content;
+    align-self: center;
+  }
 </style>
 
 <script setup>
 import {ref} from "vue";
+import SignIn from "@/components/signIn.vue";
 
+const userMenu = ref(false);
 const calculator_field = ref("0");
   let calculator_active = false;
   let calculator_value_one = ref("");
 
+  const toggleUserMenu = () => {userMenu.value = !userMenu.value };
   const toggle_calculator = () => {
     if(!calculator_active) {
       document.getElementById('basic_calculator').style.bottom = "0";
