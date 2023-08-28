@@ -6,6 +6,14 @@ const errors = require('./errors');
 const { Op } = require('sequelize');
 
 module.exports = {
+    async getCount (req, res) {
+        try {
+            const count = await Transaction.count();
+
+            res.send({ count });
+        } catch (error) { errors.errorHandler(res, error, 'Could not fetch count.') }
+    },
+
     async getTransactions (req, res) {
         try {
             const transactions = await Transaction.findAll();
@@ -62,8 +70,42 @@ module.exports = {
         } catch (error) { errors.errorHandler(res, error, 'Could not fetch transactions.') }
     },
 
-    async getTransactionByAccount (req, res) {
+    async getByUser (req, res) {
+        try {
+            const { user_id } = req.body;
+            const transactions = await Transaction.findAll({
+                where: {user_id: user_id}
+            })
 
+            if(transactions.length > 0) {
+                res.send(transactions)
+            } else {
+                throw new Error('No transactions to display.');
+            }
+
+        } catch (error) { errors.errorHandler(res, error, 'Could not fetch transactions.') }
+    },
+
+    async getByUserSet (req, res) {
+        try {
+            const { user_id, page } = req.body;
+            const itemsPerPage = 10;
+            const offset = page * itemsPerPage;
+            const limit = itemsPerPage;
+
+            const transactions = await Transaction.findAll({
+                where: {user_id: user_id},
+                offset,
+                limit
+            });
+
+            if(transactions.length > 0) {
+                res.send(transactions)
+            } else {
+                throw new Error('No transactions to display.');
+            }
+
+        } catch (error) { errors.errorHandler(res, error, 'Could not fetch transactions.') }
     },
 
     async getTransactionsByDate (req, res) {
