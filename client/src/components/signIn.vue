@@ -1,16 +1,3 @@
-<script setup>
-  import {ref} from "vue";
-
-  const signUp = ref(false);
-  const username = ref("");
-  const password = ref("");
-  const first_name = ref("");
-  const last_name = ref("");
-  const photo = ref("");
-
-  const signingUp = () => {signUp.value = !signUp.value};
-</script>
-
 <template>
 
   <button @click="signingUp" :class="{ active: signUp }">
@@ -41,7 +28,7 @@
     </div>
   </div>
 
-  <div class="signIn_div">
+  <div class="signIn_div" v-if="signUp">
     <label for="photo">Profile Picture:</label>
     <input type="file" id="photo" accept="image/*" :value="photo">
   </div>
@@ -64,3 +51,25 @@
     float: right;
   }
 </style>
+
+<script setup>
+import {ref} from "vue";
+
+const signUp = ref(false);
+const username = ref("");
+const password = ref("");
+const first_name = ref("");
+const last_name = ref("");
+const photo = ref("");
+
+const signingUp = () => {signUp.value = !signUp.value};
+
+const signIn = () => {
+  const credentials = {
+    username: username.value,
+    password: password.value
+  };
+
+
+}
+</script>
