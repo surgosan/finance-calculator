@@ -125,3 +125,8 @@ None atm
 # After Completion
 
 Add to portfolio as a video
+
+# Notes
+
+Mostly done currently.
+Create Webstorm npm command in package-lock.json

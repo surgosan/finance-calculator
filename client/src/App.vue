@@ -26,7 +26,7 @@
           <h1 id="user_menu_title">User Menu</h1>
           <div class="flex-spacer"></div>
           <button id="user_menu_close" @click="toggleUserMenu">Close</button>
-        </div>
+        </div>z
         <signIn/>
       </div>
     </teleport>
